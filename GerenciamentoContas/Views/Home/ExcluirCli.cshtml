@@ -1,0 +1,32 @@
+﻿@model GerenciamentoContas.Models.ClienteModel
+@{
+    ViewBag.Title = "Dados do cliente";
+}
+<section>
+    <div class="container">
+        <h2 class="titulinho">Excluir cliente</h2>
+        <div class="container-1">
+            @using (Html.BeginForm())
+            {
+                <a class="btn btn1" href="@Url.Action("ListarCliente", "Home", new { id = Model.CodCliente})">Voltar</a>
+                <input value="Excluir" type="submit" class="btn btn2" />
+            }
+        </div>
+        <div class="lista-1">
+            <ul class="lista-2">
+                <li class="font"><label> Código do cliente: </label> @Html.DisplayFor(model => model.CodCliente, new { @class = "font" })</li>
+                <li class="font"><label> Nome: </label> @Html.DisplayFor(model => model.NomeCliente, new { @class = "font" }) @Html.DisplayFor(model => model.SobrenomeCliente, new { @class = "font" })</li>
+                <li class="font"><label> CPF: </label> @Html.DisplayFor(model => model.CpfCliente, new { @class = "font" })</li>
+                <li class="font"><label> Data de Nascimento: </label> @Html.DisplayFor(model => model.NascCliente, new { @class = "font" })</li>
+                <li class="font"><label> Telefone: </label> @Html.DisplayFor(model => model.TelCliente, new { @class = "font" })</li>
+                <li class="font"><label> E-mail: </label> @Html.DisplayFor(model => model.EmailCliente, new { @class = "font" })</li>
+                <li class="font"><label> Endereço: </label> @Html.DisplayFor(model => model.EndCliente, new { @class = "font" })</li>
+                <li class="font"><label> Nº do endereço: </label> @Html.DisplayFor(model => model.NumEnd, new { @class = "font" })</li>
+                <li class="font"><label> Bairro: </label> @Html.DisplayFor(model => model.BairroEnd, new { @class = "font" })</li>
+                <li class="font"><label> Cidade: </label> @Html.DisplayFor(model => model.CityEnd, new { @class = "font" })</li>
+                <li class="font"><label> Estado: </label> @Html.DisplayFor(model => model.EstadoEnd, new { @class = "font" })</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script src="~/Content/Css2/js/tabela-1.js"></script>

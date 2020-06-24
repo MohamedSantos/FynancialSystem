@@ -1,0 +1,162 @@
+﻿@model GerenciamentoContas.Models.ClienteModel
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Contas.com</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Css2/imagens/footerlogo.png">
+
+    <link rel="stylesheet" href="~/Content/Css2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style1.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style.css">
+    <link rel="stylesheet" href="~/Content/Css2/fontawesome/css/all.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style-tabela.css" />
+    <link rel="stylesheet" href="~/Content/Css2/css/estilohome.css" />
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <link rel="stylesheet" href="~/Content/Css2/css/animate.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/formcursos.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/Style5.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/Style4.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top mt-3">
+            <div class="container">
+                <a href="index.html" class="logo navbar-brand">
+                    <img src="~/Content/Css2/imagens/Logocontas.png" width="142" title="Tyros">
+                </a>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto ul-ul">
+                        <li class="nav-item li-li">
+                            <a href="@Url.Action("Index","Home")" class="nav-link a-a effect-under">Voltar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <h2 class="titulinho">Cadastrar Cliente</h2>
+        <div class="container2">
+            <div class="insc-box">
+                <div class="right">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true, "")
+                        <h2 class="h2-2">Cadastro do cliente</h2>
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Nome</h2>
+                            @*<input name="nome" id="nome" type="text" class="field" placeholder="Seu Completo">*@
+                            @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "field" } })
+                            @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Sobrenome</h2>
+                            @*<input name="cpf" id="cpf" type="text" class="field" placeholder="CPF ( Sem pontuação )">*@
+                            @Html.EditorFor(model => model.SobrenomeCliente, new { htmlAttributes = new { @class = "field" } })
+                            @Html.ValidationMessageFor(model => model.SobrenomeCliente, "", new { @class = "aviso" })
+                        </div>
+
+
+                        <h2 class="h2-3">Data de Nascimento</h2>
+                        <div class="form-control-1">
+                            @*<input name="data" id="data" type="text" size="30" class="field" placeholder="00/00/0000">*@
+                            @Html.EditorFor(model => model.NascCliente, new { htmlAttributes = new { @class = "field date placeholder" } })
+                            @Html.ValidationMessageFor(model => model.NascCliente, "", new { @class = "aviso" })
+                        </div>
+
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">CPF</h2>
+                            @*<input name="cpf" id="cpf" type="text" class="field" placeholder="CPF ( Sem pontuação )">*@
+                            @Html.EditorFor(model => model.CpfCliente, new { htmlAttributes = new { @class = "field cpf", @maxlenght = "14" } })
+                            @Html.ValidationMessageFor(model => model.CpfCliente, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Telefone</h2>
+                            @*<input name="telefone" id="telefone" type="text" class="field" placeholder="Telefone">*@
+                            @Html.EditorFor(model => model.TelCliente, new { htmlAttributes = new { @class = "field phone_br" } })
+                            @Html.ValidationMessageFor(model => model.TelCliente, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Email</h2>
+                            @*<input name="email" id="email" type="text" class="field" placeholder="Email">*@
+                            @Html.EditorFor(model => model.EmailCliente, new { htmlAttributes = new { @class = "field" } })
+                            @Html.ValidationMessageFor(model => model.EmailCliente, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">CEP</h2>
+                            @*<input name="cep" id="cep" type="text" class="cep field" placeholder="CEP ( Sem pontuação )">*@
+                            @Html.EditorFor(model => model.CepEnd, new { htmlAttributes = new { @class = "field cep", @id = "cep" } })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Rua</h2>
+                            @*<input name="rua" id="rua" type="text" class="field" placeholder="Rua">*@
+                            @Html.EditorFor(model => model.EndCliente, new { htmlAttributes = new { @class = "field", @id = "rua" } })
+                            @Html.ValidationMessageFor(model => model.EndCliente, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Nº</h2>
+                            @*<input name="numero" id="numero" type="text" class="field" placeholder="Número">*@
+                            @Html.EditorFor(model => model.NumEnd, new { htmlAttributes = new { @class = "field", @maxlenght = "100" } })
+                            @Html.ValidationMessageFor(model => model.NumEnd, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Bairro</h2>
+                            @*<input name="bairro" id="bairro" type="text" class="field" placeholder="Bairro">*@
+                            @Html.EditorFor(model => model.BairroEnd, new { htmlAttributes = new { @class = "field", @id = "bairro" } })
+                            @Html.ValidationMessageFor(model => model.BairroEnd, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">Cidade</h2>
+                            @*<input name="cidade" id="cidade" type="text" class="field" placeholder="Cidade">*@
+                            @Html.EditorFor(model => model.CityEnd, new { htmlAttributes = new { @class = "field", @id = "cidade" } })
+                            @Html.ValidationMessageFor(model => model.CityEnd, "", new { @class = "aviso" })
+                        </div>
+
+                        <div class="form-control-1">
+                            <h2 class="h2-3">UF</h2>
+                            @*<input name="estado" id="uf" type="text" class="field" placeholder="Estado">*@
+                            @Html.EditorFor(model => model.EstadoEnd, new { htmlAttributes = new { @class = "field", @id = "uf", @maxlenght = "2" } })
+                            @Html.ValidationMessageFor(model => model.EstadoEnd, "", new { @class = "aviso" })
+                        </div>
+
+                        <button type="submit" class="btn">Enviar</button>
+                    }
+                </div>
+            </div>
+        </div>
+    <script src="~/Content/Css2/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/Css2/js/bootstrap.min.js"></script>
+    <script src="~/Content/Css2/js/aos.js"></script>
+    <script src="~/Content/Css2/js/aos-insc.js"></script>
+    <script src="~/Content/Css2/js/popper.min.js"></script>
+    <script src="~/Content/Css2/js/cep.js"></script>
+    <script src="~/Content/Css2/js/jquery.mask.min.js"></script>
+    <script src="~/Content/Css2/js/cursosIns.js"></script>
+    <script src="~/Scripts/Mascaras/Mascaras.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/methods_pt.js"></script>
+    <script src="~/Scripts/Mascaras/jquery.mask.js"></script>
+    @section scripts{
+        @Scripts.Render("~/bundles/Mascaras")
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>

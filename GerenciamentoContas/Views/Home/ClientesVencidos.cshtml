@@ -1,0 +1,108 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<GerenciamentoContas.Models.ClienteModel>
+@{
+    ViewBag.Title = "Clientes vencidos";
+}
+<h2>Clientes com contas vencidas</h2>
+<div class="container-1">
+    <a class="btn btn1" href="@Url.Action("Index","Home")">Voltar</a>
+</div>
+<table class="table-1">
+    <thead>
+    <th>
+        Código do cliente
+    </th>
+    <th>
+        Nome
+    </th>
+    <th>
+        Código da conta
+    </th>
+    <th>
+        Nome da conta
+    </th>
+    <th>
+        Valor
+    </th>
+    <th>
+        Multa
+    </th>
+    <th>
+        Valor total
+    </th>
+    <th>
+        Situação
+    </th>
+
+    <th>Ação</th>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        decimal tudo = item.ValorConta + item.MultaConta;
+        ViewBag.tudo = tudo;
+    <tr class="active-row">
+        @if (item.SituacaoConta == 0) {
+        <td>
+            @Html.DisplayFor(modelItem => item.FkCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCliente) @Html.DisplayFor(modelItem => item.SobrenomeCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoConta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeConta)
+        </td>
+        <td>
+            R$ @Html.DisplayFor(modelItem => item.ValorConta)
+        </td>
+        <td class="nada">
+            R$ @Html.DisplayFor(modelItem => item.MultaConta)
+        </td>
+        <td>
+            R$ @ViewBag.tudo
+        </td>
+        <td>
+            @Html.ActionLink("Mudar para pago", "PagContasCliVencido", new { id = item.CodigoConta }, new { @class = "a-1" })
+        </td>
+
+        <td>
+            @Html.ActionLink("Ver todas as contas", "ContasCli", new { id = item.FkCliente }) |
+        </td>
+        }
+    </tr>
+    }
+</table>
+
+
+    @if (Model.TotalItemCount != Model.Count)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de
+                @Model.PageCount
+            </div>
+        </div>
+    }
+
+
+    <div class="pagedList">
+        @Html.PagedListPager(Model, page => Url.Action("ClientesVencidos", new
+    {
+        page,
+        sortOn = ViewBag.SortOn,
+        orderBy = ViewBag.OrderBy,
+        pSortOn =
+            ViewBag.SortOn,
+        keyword = ViewBag.Keyword
+    }),
+            PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/Mascaras")
+    @Scripts.Render("~/bundles/jqueryval")
+}

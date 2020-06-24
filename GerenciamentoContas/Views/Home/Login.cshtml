@@ -1,0 +1,87 @@
+﻿@model GerenciamentoContas.Models.LoginModel
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <title>Login - Acesse sua conta. </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/login/imagens/footerlogo.png">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="~/Content/login/css/aos.css">
+    <!-- Animações de icones -->
+    <link rel="stylesheet" href="~/Content/login/css/animate.css">
+    <!-- Framework -->
+    <link rel="stylesheet" href="~/Content/login/css/bootstrap.min.css">
+    <!-- Icones -->
+    <link rel="stylesheet" href="~/Content/login/fontawesome/css/all.css">
+    <!-- Estilo Principal -->
+    <!-- <link rel="stylesheet" href="./css/Style5.css"> -->
+    <!-- Estilo com Hover -->
+
+    <link rel="stylesheet" href="~/Content/login/css/Style4.css">
+    <!-- Folha-login -->
+    <link rel="stylesheet" href="~/Content/login/css/login.css">
+
+</head>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="@Url.Action("Inicio","Home")" class="a2-home nav-link">Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+        <div class="container1 pss">
+            <div class="login-content">
+                    @using (Html.BeginForm())
+                    {
+                        <img src="~/Content/login/imagens/logo in png contasAzul.png">
+                        <h2 class="title">Bem-Vindo</h2>
+                        @Html.ValidationSummary(true,"")
+                        <div class="input-div one form-control-1">
+                            <div class="i">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Usuário</h5>
+                                @Html.EditorFor(m => m.Adm, new { htmlAttributes = new { @id = "username", @class = "input" } })
+                                @*<input type="text" class="input" id="username">*@
+                            </div>
+                        </div>
+
+                        <div class="input-div pass form-control-1">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Senha</h5>
+                                @Html.EditorFor(m => m.Senha, new { htmlAttributes = new { @id = "password", @class = "input" } })
+                                @*<input type="password" class="input" id="password">*@
+                            </div>
+                        </div>
+                        @ViewBag.Message
+                        <input type="submit" class="btn2" value="Login">
+                    }
+            </div>
+        </div>
+
+        <!-- SCRIPTS -->
+        <script src="~/Content/login/js/jquery-3.4.1.min.js"></script>
+        <script src="~/Content/login/js/bootstrap.min.js"></script>
+        <script src="~/Content/login/js/aos.js"></script>
+        <script src="~/Content/login/js/aos-insc.js"></script>
+        <script src="~/Content/login/js/popper.min.js"></script>
+        <script src="~/Content/login/js/jquery.mask.min.js"></script>
+        <script src="~/Content/login/js/mainlogin.js"></script>
+        <!-- SCRIPTS -->
+    </body>
+</html>

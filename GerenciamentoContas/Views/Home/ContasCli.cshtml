@@ -1,0 +1,177 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<GerenciamentoContas.Models.ContasModel>
+
+@{
+    ViewBag.Title = "Contas";
+
+}
+
+<h2 class="titulinho">Contas do cliente</h2>
+
+<div class="container-1">
+    <a class="btn btn1" href="@Url.Action("CadastrarContas","Home")">Registrar nova conta</a>
+    <a class="btn btn2" href="@Url.Action("Index","Home")">Voltar</a>
+</div>
+
+<table class="table-1">
+    <thead>
+    <th>
+        Código da conta
+    </th>
+    <th>
+        Tipo de conta
+    </th>
+    <th>
+        Nome
+    </th>
+    <th>
+        Descrição da conta
+    </th>
+    <th>
+        Data de vencimento
+    </th>
+    <th>
+        Valor
+    </th>
+    <th>
+        Multa
+    </th>
+    <th>
+        Valor total
+    </th>
+    <th>
+        Observações
+    </th>
+    <th>
+        Conta vencida?
+    </th>
+    <th>
+        Situação
+    </th>
+    <th>
+        Ações
+    </th>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        decimal tudo = item.ValorConta + item.MultaConta;
+        ViewBag.tudo = tudo;
+        TimeSpan HojeMenos = item.VencConta - DateTime.Now;
+        TimeSpan HojeMais = DateTime.Now - item.VencConta;
+        ViewBag.Venceu = HojeMais.Days;
+        ViewBag.HaVencer = HojeMenos.Days;
+        DateTime date = DateTime.Now;
+        <tbody>
+            <tr class="active-row">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodConta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoConta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeConta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescricaoConta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VencConta)
+                </td>
+                <td>
+                    R$  @Html.DisplayFor(modelItem => item.ValorConta)
+                </td>
+                <td>
+                    R$  @Html.DisplayFor(modelItem => item.MultaConta)
+                </td>
+                @if (item.VencConta < date)
+                {
+                    <td class="nada">
+                        R$ @ViewBag.tudo
+                    </td>
+                }
+                else if (item.VencConta >= date)
+                {
+                    <td class="tudo">
+                        R$ @Html.DisplayFor(modelItem => item.ValorConta)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObsConta)
+                </td>
+
+                @if (item.VencConta < date)
+                {
+                    <td class="nada">
+                        Sim, venceu há @ViewBag.Venceu dias
+                    </td>
+                }
+                else if (item.VencConta >= date)
+                {
+                    <td class="tudo">
+                        Não, faltam @ViewBag.HaVencer dias para vencer
+                    </td>
+                }
+                @if (item.Situacao == 0)
+                {
+                    <td class="nada">
+                        Conta não paga <br /> @Html.ActionLink("Mudar para pago", "PagContasCli", new { id = item.CodConta }, new { @class = "a-1" })
+                    </td>
+                }
+                else if (item.Situacao == 1)
+                {
+                    <td class="tudo">
+                        Conta paga
+                    </td>
+                }
+
+                <td>
+                    @Html.ActionLink("Alterar dados da conta", "AlterarContas", new { id = item.CodConta }, new { @class = "a-1" }) |
+                    @Html.ActionLink("Excluir", "ExcluirConta", new { id = item.CodConta }, new { @class = "a-1" })
+                </td>
+            </tr>
+        </tbody>
+    }
+    @if (Model.Count == 1)
+    {
+        <tr>
+            <td>
+                <b>
+                    Mostrando @Model.Count registro de @Model.TotalItemCount
+                </b>
+            </td>
+        </tr>}
+    else if (Model.Count < 1)
+    {
+        <tr><td><b> Não há registros para mostrar </b></td></tr>
+    }
+    else
+    {
+        <tr><td><b>Mostrando @Model.Count registros de @Model.TotalItemCount</b></td></tr>
+    }
+</table>
+@{
+    if (Model.TotalItemCount != Model.Count)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de
+                @Model.PageCount
+            </div>
+        </div>
+    }
+}
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("ContasCli", new
+{ page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
+ViewBag.SortOn, keyword = ViewBag.Keyword }),
+PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+<script src="~/Content/Css2/js/tabela-1.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/Mascaras")
+    @Scripts.Render("~/bundles/jqueryval")
+}

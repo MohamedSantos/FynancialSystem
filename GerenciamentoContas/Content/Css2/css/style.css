@@ -1,0 +1,66 @@
+.boxed_btn_green {
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  padding: 12px 30px;
+  background: #00D363;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  display: inline-block;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.boxed_btn_green:hover {
+  background: transparent;
+  color: #00D363;
+  border: 1px solid #00D363;
+  color: #00D363 !important;
+}
+
+.boxed_btn_green2 {
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  padding: 12px 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  background: transparent;
+  color: #00D363;
+  border: 1px solid #00D363;
+  display: inline-block;
+}
+
+.boxed_btn_green2:hover {
+  color: #fff !important;
+  background: #00D363;
+}
+
+.lets_launch .launch_text .chat .boxed_btn_green2:hover {
+  border-color: #00D363 !important;
+}
+
+.search_area .single_search .prising_content a.boxed_btn_green {
+  padding: 7px 36px;
+  color: #fff;
+}
+
+.search_area .single_search .prising_content a.boxed_btn_green.disable {
+  background: #C7C7C7;
+}
+
+.search_area .single_search .prising_content a.boxed_btn_green.disable:hover {
+  border: 1px solid transparent;
+  color: #fff !important;
+}

@@ -1,0 +1,30 @@
+﻿@model GerenciamentoContas.Models.ContasAdmModel
+@{
+    ViewBag.Title = "PagContasAdm";
+}
+
+<h2>DESEJA CONFIRMAR O PAGAMENTO?</h2>
+
+<section>
+    <div class="container">
+        <div class="lista-1">
+            <ul class="lista-2">
+                <li class="font"><label> Código da conta: </label> @Html.DisplayFor(model => model.CodConta, new { @class = "font" })</li>
+                <li class="font"><label> Tipo: </label> @Html.DisplayFor(model => model.TipoConta, new { @class = "font" })</li>
+                <li class="font"><label> Nome: </label> @Html.DisplayFor(model => model.NomeConta, new { @class = "font" })</li>
+                <li class="font"><label> Data de vencimento: </label> @Html.DisplayFor(model => model.VencConta, new { @class = "font" })</li>
+                <li class="font"><label> Valor: </label> R$ @Html.DisplayFor(model => model.ValorConta, new { @class = "font" })</li>
+                <li class="font"><label> Valor da Multa: </label> R$ @Html.DisplayFor(model => model.MultaConta, new { @class = "font" })</li>
+                <li class="font"><label> Observações: </label> @Html.DisplayFor(model => model.ObsConta, new { @class = "font" })</li>
+            </ul>
+        </div>
+            <div class="container-1">
+                @using (Html.BeginForm())
+                 {
+                    <button class="btn btn2" type="submit">Sim</button>
+                 }
+                 <a class="btn btn2" href="@Url.Action("ContasAdm","Home")">Não</a>
+            </div>
+    </div>
+</section>
+<script src="~/Content/Css2/js/tabela-1.js"></script>

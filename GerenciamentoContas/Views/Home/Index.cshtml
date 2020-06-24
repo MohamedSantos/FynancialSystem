@@ -1,0 +1,124 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<GerenciamentoContas.Models.ClienteModel>
+@{
+    ViewBag.Title = "Lista de clientes";
+}
+<h2> Lista de clientes </h2>
+<div class="container-1">
+    <a class="btn btn1" href="@Url.Action("CadastroCli","Home")">Registrar novo cliente</a>
+    <a class="btn btn2" href="@Url.Action("ClientesVencidos","Home")">Ver clientes com contas vencidas</a>
+</div>
+@using (Html.BeginForm())
+{
+
+    <div class="search-box159">
+        <input class="search-txt159" type="text" name="keyword" value="@ViewBag.keyword" placeholder="Buscar nome">
+        <a class="search-btn159">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+}
+
+<table class="table-1">
+    <thead>
+    <th>
+        @Html.ActionLink("Código", "Index", new
+  {
+      sortOn = "CodCliente",
+      orderBy = ViewBag.OrderBy,
+      pSortOn = ViewBag.SortOn,
+      keyword = ViewBag.Keyword
+  }, new { @class="a link"})
+    </th>
+    <th>
+        @Html.ActionLink("Nome", "Index", new
+   {
+       sortOn = "NomeCliente",
+       orderBy = ViewBag.OrderBy,
+       descending = ViewBag.OrderByDescending,
+       pSortOn = ViewBag.SortOn,
+       keyword = ViewBag.Keyword
+   }, new { @class="a link"})
+    </th>
+    <th>CPF</th>
+    <th>Telefone</th>
+    <th>Email</th>
+    <th>Quantidade de Boletos</th>
+    <th>Editar</th>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        ViewBag.Qtd = "Não possui boletos";
+            <tr class="active-row">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCliente) @Html.DisplayFor(modelItem => item.SobrenomeCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpfCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCliente)
+                </td>
+                @if(item.QtdContas == null)
+                {
+                @ViewBag.Qtd
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdContas)
+                </td>
+                <td>
+                    @Html.ActionLink("Dados do cliente", "ListarCliente", new { id = item.CodCliente }, new { @class = "a-1" })
+                    @Html.ActionLink("Ver contas", "ContasCli", new { id = item.CodCliente }, new { @class = "a-1" })
+                </td>
+            </tr>
+    }
+    @if (Model.Count == 1)
+    {
+        <tr>
+            <td>
+                <b>
+                    Mostrando @Model.Count registro de @Model.TotalItemCount
+                </b>
+            </td>
+        </tr>}
+    else if (Model.Count < 1)
+    {
+        <tr><td><b> Não há registros para mostrar </b></td></tr>
+    }
+    else
+    {
+        <tr><td><b>Mostrando @Model.Count registros de @Model.TotalItemCount</b></td></tr>
+    }
+</table>
+@{
+    if (Model.TotalItemCount != Model.Count)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de
+                @Model.PageCount
+            </div>
+        </div>
+    }
+}
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+{ page, sortOn = ViewBag.SortOn, orderBy = ViewBag.OrderBy, pSortOn =
+ViewBag.SortOn, keyword = ViewBag.Keyword }),
+PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+<script src="~/Content/Css2/js/tabela-1.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/Mascaras")
+    @Scripts.Render("~/bundles/jqueryval")
+}

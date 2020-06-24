@@ -1,0 +1,128 @@
+﻿@model GerenciamentoContas.Models.ContasAdmModel
+@{
+    Layout = null;
+    List<string> TiposContas = new List<string>();
+    TiposContas.Add("Água, luz, gás ou telefone");
+    TiposContas.Add("Boletos de cobrança");
+    TiposContas.Add("Tributos");
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Contas.com</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Css2/imagens/footerlogo.png">
+
+    <link rel="stylesheet" href="~/Content/Css2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style1.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style.css">
+    <link rel="stylesheet" href="~/Content/Css2/fontawesome/css/all.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/style-tabela.css" />
+    <link rel="stylesheet" href="~/Content/Css2/css/estilohome.css" />
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <link rel="stylesheet" href="~/Content/Css2/css/animate.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/formcursos.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/Style5.css">
+    <link rel="stylesheet" href="~/Content/Css2/css/Style4.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top mt-3">
+            <div class="container">
+                <a href="index.html" class="logo navbar-brand">
+                    <img src="~/Content/Css2/imagens/Logocontas.png" width="142" title="Tyros">
+                </a>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto ul-ul">
+                        <li class="nav-item li-li">
+                            <a href="@Url.Action("ContasAdm","Home")" class="nav-link a-a effect-under">Voltar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <h2 class="titulinho">Cadastrar Cliente</h2>
+    <div class="container2">
+        <div class="insc-box">
+            <div class="right">
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true, "")
+                    <h2 class="h2-2">Cadastrar Conta a Pagar</h2>
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Tipo de conta</h2>
+                        @*<input name="nome" id="nome" type="text" class="field" placeholder="Seu Completo">*@
+                        @Html.DropDownListFor(model => model.TipoConta, new MultiSelectList(TiposContas), new { htmlAttributes = new { @class = "field" } })
+                        @Html.ValidationMessageFor(model => model.TipoConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Nome da conta</h2>
+                        @*<input name="cpf" id="cpf" type="text" class="field" placeholder="CPF ( Sem pontuação )">*@
+                        @Html.EditorFor(model => model.NomeConta, new { htmlAttributes = new { @class = "field" } })
+                        @Html.ValidationMessageFor(model => model.NomeConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Descrição da conta</h2>
+                        @*<input name="cpf" id="cpf" type="text" class="field" placeholder="CPF ( Sem pontuação )">*@
+                        @Html.EditorFor(model => model.DescricaoConta, new { htmlAttributes = new { @class = "field" } })
+                        @Html.ValidationMessageFor(model => model.DescricaoConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <h2 class="h2-3">Data de Vencimento</h2>
+                    <div class="form-control-1">
+                        @*<input name="data" id="data" type="text" size="30" class="field" placeholder="00/00/0000">*@
+                        @Html.EditorFor(model => model.VencConta, new { htmlAttributes = new { @class = "field date placeholder" } })
+                        @Html.ValidationMessageFor(model => model.VencConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Valor</h2>
+                        @*<input name="telefone" id="telefone" type="text" class="field" placeholder="Telefone">*@
+                        @Html.EditorFor(model => model.ValorConta, new { htmlAttributes = new { @class = "field money2", @id = "money2" } })
+                        @Html.ValidationMessageFor(model => model.ValorConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Multa (caso não possua, digite 0)</h2>
+                        @*<input name="telefone" id="telefone" type="text" class="field" placeholder="Telefone">*@
+                        @Html.EditorFor(model => model.MultaConta, new { htmlAttributes = new { @class = "field money2", @id = "money2" } })
+                        @Html.ValidationMessageFor(model => model.MultaConta, "", new { @class = "aviso" })
+                    </div>
+
+                    <div class="form-control-1">
+                        <h2 class="h2-3">Observações (caso não possua, deixe em branco)</h2>
+                        @*<input name="email" id="email" type="text" class="field" placeholder="Email">*@
+                        @Html.EditorFor(model => model.ObsConta, new { htmlAttributes = new { @class = "field", @maxlenght = "100" } })
+                    </div>
+
+                    <button type="submit" class="btn">Enviar</button>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/Css2/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/Css2/js/bootstrap.min.js"></script>
+    <script src="~/Content/Css2/js/aos.js"></script>
+    <script src="~/Content/Css2/js/aos-insc.js"></script>
+    <script src="~/Content/Css2/js/popper.min.js"></script>
+    <script src="~/Content/Css2/js/cep.js"></script>
+    <script src="~/Content/Css2/js/jquery.mask.min.js"></script>
+    <script src="~/Content/Css2/js/cursosIns.js"></script>
+    <script src="~/Scripts/Mascaras/Mascaras.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/methods_pt.js"></script>
+    <script src="~/Scripts/Mascaras/jquery.mask.js"></script>
+    @section scripts{
+        @Scripts.Render("~/bundles/Mascaras")
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
